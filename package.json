@@ -1,0 +1,26 @@
+{
+  "name": "slowpoke",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && cp -r ./data ./dist/data",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js ./data/foundation.tsv ./data/passage.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djkramnik/slowpoke.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djkramnik/slowpoke/issues"
+  },
+  "homepage": "https://github.com/djkramnik/slowpoke#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.15.15",
+    "typescript": "^5.8.3"
+  }
+}
