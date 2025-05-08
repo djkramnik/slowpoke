@@ -113,7 +113,7 @@ def main():
 
     passage_text = pathlib.Path(passage_path).read_text(encoding="utf-8")
     edges += ingest_passage(passage_text)
-
+    print(edges)
     print("Ask me questions (empty line to quit)…")
     while True:
         try:
