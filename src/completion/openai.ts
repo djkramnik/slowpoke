@@ -1,5 +1,7 @@
 import OpenAI from 'openai'
 import { ResponsesModel } from 'openai/resources/shared'
+import { posPrompt } from './prompt'
+import { log } from '../util/debug'
 
 let _client: OpenAI
 
@@ -20,6 +22,12 @@ const getCompletionFactory = ({
   instructions: string // later, if needed, can vary the instructions with templating
 }) => {
   return function getCompletion(input: string) {
+    log('COMPLETION PAYLOAD:', {
+      model,
+      instructions,
+      input
+    })
+
     return getOpenAiClient().responses.create({
       model,
       instructions,
@@ -31,6 +39,6 @@ const getCompletionFactory = ({
 export const completions = {
   getPos: getCompletionFactory({
     model: 'gpt-4o',
-    instructions: `give me the parts of speech for this sentence:` // help with creating these unwieldy chunks of text?
+    instructions: posPrompt // help with creating these unwieldy chunks of text?
   })
 }
