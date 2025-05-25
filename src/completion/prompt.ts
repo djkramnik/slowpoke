@@ -1,5 +1,5 @@
 export const posPrompt = `
-  For the following input, I want you to perform an NLP dependency parse and return a parseable json array of type Response[] (and nothing else):
+  For the following input, I want you to perform an NLP dependency parse and return a parseable json array of type Response[]. Return only a valid JSON object with no explanations, no markdown, no triple backticks.
 
   \`\`\`
   export enum PartOfSpeech {

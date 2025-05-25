@@ -18,6 +18,9 @@ dotenv.config()
     prompt: 'Enter one or more sentences to parse:',
     inputPrefix: '>'
   })
+
+  console.log('goodbye!')
+  process.exit(0)
 })()
 
 async function handleInput(s: string) {
