@@ -29,7 +29,7 @@ const getCompletionFactory = ({
 }
 
 export const completions = {
-  getPos: getCompletionFactory.bind(null, {
+  getPos: getCompletionFactory({
     model: 'gpt-4o',
     instructions: `give me the parts of speech for this sentence:` // help with creating these unwieldy chunks of text?
   })
