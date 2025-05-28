@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Change if you're using a different DB
+  url      = env("DATABASE_URL")
+}
+
+model Entity {
+  id          Int           @id @default(autoincrement())
+  entityRefs  EntityRef[]   @relation("EntityToRef")
+}
+
+model History {
+  id          Int           @id @default(autoincrement())
+  idx         Int
+  qualifier   String
+  entityRefs  EntityRef[]
+}
+
+model EntityRef {
+  id         Int         @id @default(autoincrement())
+  ref        String
+  entityId   Int?
+  historyId  Int
+
+  entity     Entity?     @relation("EntityToRef", fields: [entityId], references: [id])
+  history    History     @relation(fields: [historyId], references: [id])
+  acts       EntityAct[] @relation("RefToAct")
+  targetActs EntityAct[] @relation("TargetToAct")
+  entityAttrs EntityAttr[] @relation("RefToEntityAttr")
+  targetAttrs EntityAttr[] @relation("TargetToEntityAttr")
+}
+
+model EntityAct {
+  id         Int        @id @default(autoincrement())
+  act        String
+  refId      Int
+  targetId   Int?
+
+  ref        EntityRef  @relation("RefToAct", fields: [refId], references: [id])
+  target     EntityRef? @relation("TargetToAct", fields: [targetId], references: [id])
+  attrs      ActAttr[]
+}
+
+model ActAttr {
+  id         Int       @id @default(autoincrement())
+  actId      Int
+  attr       String
+  qualifier  String?
+
+  act        EntityAct @relation(fields: [actId], references: [id])
+}
+
+model EntityAttr {
+  id         String     @id
+  refId      Int
+  attr       String
+  qualifier  String?
+  targetId   Int?
+
+  ref        EntityRef  @relation("RefToEntityAttr", fields: [refId], references: [id])
+  target     EntityRef? @relation("TargetToEntityAttr", fields: [targetId], references: [id])
+}
