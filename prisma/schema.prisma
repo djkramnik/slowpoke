@@ -15,7 +15,7 @@ model Entity {
 model History {
   id          Int           @id @default(autoincrement())
   idx         Int
-  qualifier   String
+  qualifier   String?
   entityRefs  EntityRef[]
 }
 
